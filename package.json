@@ -1,0 +1,23 @@
+{
+  "name": "siren",
+  "version": "1.0.0",
+  "description": "Siren is a CLI storefront that uses Node.js and MySQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmastotz/siren.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emmastotz/siren/issues"
+  },
+  "homepage": "https://github.com/emmastotz/siren#readme",
+  "dependencies": {
+    "inquirer": "^7.0.0"
+  }
+}
