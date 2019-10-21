@@ -41,3 +41,5 @@ VALUES ("Agenda Book", "Crafts & Supplies", 12.95, 12);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Acrylic Paint", "Crafts & Supplies", 19.99, 10);
+
+SELECT * FROM siren_db;
