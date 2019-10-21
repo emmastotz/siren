@@ -4,11 +4,15 @@
 require("dotenv").config();
 var inquirer = require("inquirer");
 var mysql = require("mysql");
-var cliTable = require("cli-table");
+// var Table = require("cli-table");
 
 var keys = require("./keys.js");
 var mySqlPass = keys.keys.secret;
 var mySqlUser = keys.keys.id;
+// var table = new Table ({
+//   head: ["item_id", "product_name", "department_name", "price", "stock_quantity"],
+//   colWidths: [100,200]
+// });
 // =================================================
 // MySQL CONNECTION TO DATABASE
 // =================================================
@@ -51,7 +55,7 @@ function promptCustomer () {
     if (err) {
       console.log("Error prompting customer: " + err);
       connection.end();
-    }
+    };
 
     inquirer.prompt([
       {
