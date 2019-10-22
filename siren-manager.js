@@ -4,15 +4,11 @@
 require("dotenv").config();
 var inquirer = require("inquirer");
 var mysql = require("mysql");
-// var Table = require("cli-table");
+var Table = require("cli-table");
 
 var keys = require("./keys.js");
 var mySqlPass = keys.keys.secret;
 var mySqlUser = keys.keys.id;
-// var table = new Table ({
-//   head: ["item_id", "product_name", "department_name", "price", "stock_quantity"],
-//   colWidths: [100,200]
-// });
 
 // =================================================
 // MySQL CONNECTION TO DATABASE
@@ -28,7 +24,7 @@ var connection = mysql.createConnection ({
 
 connection.connect(function(err) {
   if (err) throw err; 
-  console.log("Connected at: " + connection.threadId);
+  // console.log("Connected at: " + connection.threadId);
   viewMenu();
 });
 // =================================================
@@ -37,15 +33,22 @@ connection.connect(function(err) {
 function viewProducts() {
   let sqlQuery = "SELECT * FROM products";
   connection.query(sqlQuery, function (err, response) {
+    var table = new Table ({
+      head: ["item_id", "product_name", "department_name", "price", "stock_quantity"],
+      colWidths: [10,25,25,10,15]
+    });
+
     if (err) {
       console.log("Error displaying products: " + err);
       connection.end();
     } else {
       console.log("------------------------------");
       for (var i = 0; i < response.length; i++) {
-        console.log(response[i].item_id + " : " + response[i].product_name + ", " + response[i].price);
+        table.push([
+          response[i].item_id, response[i].product_name, response[i].department_name, response[i].price, response[i].stock_quantity
+        ]);
       }
-      console.log("------------------------------");
+      console.log(table.toString());
       continueManaging();
     }
   });
@@ -54,12 +57,18 @@ function viewProducts() {
 function viewLowInventory() {
   let sqlQuery = "SELECT * FROM products WHERE stock_quantity <= 5";
   connection.query(sqlQuery, function (err,response) {
+    var table = new Table ({
+      head: ["item_id", "product_name", "department_name", "price", "stock_quantity"],
+      colWidths: [10,25,25,10,15]
+    });
     if (response.length > 0){
       console.log("------------------------------");
       for (var i = 0; i < response.length; i++) {
-        console.log(response[i].item_id + " : " + response[i].product_name + ", " + response[i].department_name + ", " + response[i].stock_quantity);
+        table.push([
+          response[i].item_id, response[i].product_name, response[i].department_name, response[i].price, response[i].stock_quantity
+        ]);
       };
-      console.log("------------------------------");
+      console.log(table.toString());
     } else {
       console.log("No items need to be stocked at this time.");
     }
