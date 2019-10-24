@@ -14,7 +14,6 @@ var mySqlUser = keys.keys.id;
 // MySQL CONNECTION TO DATABASE
 // =================================================
 var connection = mysql.createConnection ({
-  // properties...
   host: "localhost",
   port: 3306,
   user: mySqlUser,
@@ -24,7 +23,6 @@ var connection = mysql.createConnection ({
 
 connection.connect(function(err) {
   if (err) throw err; 
-  // console.log("Connected at: " + connection.threadId);
   viewMenu();
 });
 // =================================================
@@ -49,7 +47,7 @@ function viewProducts() {
         ]);
       }
       console.log(table.toString());
-      continueManaging();
+      viewMenu();
     }
   });
 };
@@ -72,7 +70,7 @@ function viewLowInventory() {
     } else {
       console.log("No items need to be stocked at this time.");
     }
-    continueManaging();
+    viewMenu();
   });
 };
 // =================================================
@@ -83,13 +81,26 @@ function addInventory() {
       console.log ("Error adding inventory/prompting manager.");
       connection.end();
     };
+    
+    var respLength = parseInt(response.length);
 
     inquirer.prompt([
       {
-        type: "list",
-        message: "Which item id would you like to add stock to?",
+        type: "input",
+        message: "Select the item ID for the item that you would you like to add stock to.",
         name: "itemID",
-        choices: [1,2,3,4,5,6,7,8,9,10]
+        validate: function (input) {
+          num = parseInt(input);
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else if (num > respLength) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }        
+        }
       },
       {
         type: "input",
@@ -124,7 +135,7 @@ function addInventory() {
             console.log("------------------------------");
             console.log("Item #" + managerChoice.item_id + " has been stocked to " + newQuantity + "!");
             console.log("------------------------------");
-            continueManaging ();
+            viewMenu();
           }
         }
       )
@@ -182,7 +193,7 @@ function addNewProduct() {
             console.log("------------------------------");
             console.log("Your new product " + productName + " has been added to " + "the inventory!");
             console.log("------------------------------");
-            continueManaging ();
+            viewMenu();
           }
         }
       )
@@ -212,24 +223,9 @@ function viewMenu () {
       case "Add New Product":
         addNewProduct();
         break;
+      case "Exit":
+        process.exit();
     };
   });
 }
-// =================================================
-function continueManaging (){
-  inquirer.prompt([
-    {
-      type: "confirm",
-      name: "confirm",
-      message: "Are there any additional actions you'd like to take?"
-  
-    }
-  ]).then(function(response) {
-    if (response.confirm) {
-      viewMenu();
-    } else {
-      process.exit();
-    }
-  });
-};
 // =================================================

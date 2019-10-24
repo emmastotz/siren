@@ -60,12 +60,25 @@ function promptCustomer () {
       connection.end();
     };
 
+    var respLength = parseInt(response.length);
+
     inquirer.prompt([
       {
-        type: "list",
-        message: "Please select the ID of the product you'd like to purchase.",
+        type: "input",
+        message: "Select the item ID for the item that you would you like to add stock to.",
         name: "itemID",
-        choices: [1,2,3,4,5,6,7,8,9,10]
+        validate: function (input) {
+          num = parseInt(input);
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else if (num > respLength) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }        
+        }
       },
       {
         type: "input",
