@@ -65,7 +65,7 @@ function promptCustomer () {
     inquirer.prompt([
       {
         type: "input",
-        message: "Select the item ID for the item that you would you like to add stock to.",
+        message: "Select the item ID for the item that you would you like to purchase.",
         name: "itemID",
         validate: function (input) {
           num = parseInt(input);
@@ -83,7 +83,16 @@ function promptCustomer () {
       {
         type: "input",
         message: "How many of these would you like to purchase?",
-        name: "stockQuantity"
+        name: "stockQuantity",
+        validate: function (input) {
+          num = parseInt(input);
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }
+        }        
       }
     ]).then (function(answer){
       for (var i = 0; i < response.length; i++) {

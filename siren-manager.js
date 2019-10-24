@@ -81,7 +81,7 @@ function addInventory() {
       console.log ("Error adding inventory/prompting manager.");
       connection.end();
     };
-    
+
     var respLength = parseInt(response.length);
 
     inquirer.prompt([
@@ -181,8 +181,6 @@ function addNewProduct() {
 
       var sqlQuery = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES(" + "\'" + productName + "\'" + ", " + "\'" + departmentName + "\'" + ", " + price + ", " + stockQuantity + ")";
 
-      console.log("Query: " + sqlQuery);
-
       connection.query (sqlQuery, function (err) {
           if (err) {
             console.log("------------------------------");
@@ -191,7 +189,7 @@ function addNewProduct() {
             connection.end();
           } else {
             console.log("------------------------------");
-            console.log("Your new product " + productName + " has been added to " + "the inventory!");
+            console.log("Your new product " + productName + " has been added to the inventory!");
             console.log("------------------------------");
             viewMenu();
           }
@@ -207,7 +205,7 @@ function viewMenu () {
       type: "list",
       message: "What would you like to do?",
       name: "action",
-      choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
+      choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"]
     }
   ]).then(function(response) {
     switch(response.action) {
