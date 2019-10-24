@@ -1,5 +1,5 @@
 ### **Siren**
-#### *Siren is a CLI storefront that uses Node.js and MySQL. *
+#### *Siren is a CLI storefront that uses Node.js and MySQL.*
 
 ##### PROBLEM/SOLUTION
 Siren is a one stop shop for all your shopping needs. Even better, purchase online from the comfort of your home. Enjoy quick, two year shipping and no money back guarantees.
