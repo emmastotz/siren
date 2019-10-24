@@ -105,7 +105,16 @@ function addInventory() {
       {
         type: "input",
         message: "How many would you like to add?",
-        name: "stockQuantity"
+        name: "stockQuantity",
+        validate: function (input) {
+          num = parseInt(input);
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }
+        } 
       }
     ]).then (function(answer){
       for (var i = 0; i < response.length; i++){
@@ -166,11 +175,27 @@ function addNewProduct() {
         type: "input",
         message: "What is the price of the item?",
         name: "price",
+        validate: function (input) {
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }
+        } 
       },
       {
         type: "input",
         message: "How many will be in stock?",
-        name: "stockQuantity"
+        name: "stockQuantity",
+        validate: function (input) {
+          if (isNaN(input) === true) {
+            console.log('\n Invalid Input');
+            return false;
+          } else {
+            return true;
+          }
+        } 
       }
     ]).then (function(answer){
       

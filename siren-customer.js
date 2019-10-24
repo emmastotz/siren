@@ -85,7 +85,6 @@ function promptCustomer () {
         message: "How many of these would you like to purchase?",
         name: "stockQuantity",
         validate: function (input) {
-          num = parseInt(input);
           if (isNaN(input) === true) {
             console.log('\n Invalid Input');
             return false;
