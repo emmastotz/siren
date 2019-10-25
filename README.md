@@ -27,7 +27,7 @@ Siren is a one stop shop for all your shopping needs. Even better, purchase onli
 
 ##### Instructions to Run the App
 *See my demo here: https://drive.google.com/file/d/1Gt0wY57Ccpon9kTtpmuVe4fehH3Y8dK5/view*
-* Clone the file from github. (https://github.com/emmastotz/gari-node-app)
+* Clone the file from github. (https://github.com/emmastotz/siren)
 * Install all dependencies needed to run the program ("npm install") and acquire needed API keys.
 * Run the applications using node in the command line ("node siren-customer.js" or "node siren-manager.js").
 * Follow the inquirer prompts to successfully make purchases from my database that provides prices, but doesn't actually charge you. 
